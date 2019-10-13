@@ -1,22 +1,36 @@
-.App {
-  text-align: center;
+.Magic-Banner {
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
+.sort-menu{
+  text-align: left;
+  padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sort-text{
+  padding: 15px;
+}
+
+/* .why-do-i-not-work-wtf {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+} */
+
+.magic-card {
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  margin: 10px;
+  font-size: .8rem;
+  text-align: center;
+  padding: 10px;
+
 }
 
-.App-link {
-  color: #09d3ac;
+.magicCard img {
+  width: 223px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+  padding-bottom: 15px;
 }
