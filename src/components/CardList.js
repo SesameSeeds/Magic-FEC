@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import Loader from "./Loader";
+import SearchBar from "./SearchBar";
 import debounce from "lodash.debounce";
 
 class CardList extends Component {
@@ -31,10 +32,13 @@ class CardList extends Component {
 
       // Checks that the page has scrolled to the bottom
       if (
-        window.innerHeight + document.documentElement.scrollTop ===
+        window.innerHeight + document.documentElement.scrollTop !==
         document.documentElement.offsetHeight
+        //TODO Investigate how potential styling changes this logic.  Loading works with !== but it messes with search functioning causing a reset after a particular amount of time.
       ) {
         loadCards();
+      } else {
+        // console.log("not able to call load cards");
       }
     }, 100);
   }
@@ -79,11 +83,12 @@ class CardList extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     return (
-      <div>
+      <div className="effing-loader">
         {this.state.initialLoading && <Loader />}
+        <div className="effing-search">
+          {!this.state.initialLoading && <SearchBar items={this.state.cards} />}
+        </div>
         {Object.keys(this.state.cards).map(key => (
           <Card index={key} key={key} details={this.state.cards[key]} />
         ))}

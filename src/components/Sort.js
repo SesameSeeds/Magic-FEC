@@ -1,36 +1,12 @@
 import React, { Component } from "react";
 
 class Sort extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      cardSort: 0
+      cards: []
     };
-  }
-
-  handleFormInput(cardSort) {
-    this.setState({
-      cardSort: cardSort
-    });
-  }
-
-  render() {
-    return (
-      <div className="sort">
-        <SortMenu cardSort={this.state.cardSort} onFormInput={this.handleFormInput} />
-      </div>
-    );
-  }
-}
-
-class SortMenu extends Component {
-  constructor() {
-    super();
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange() {
-    this.props.onFormInput(this.refs["sortCards"].getDOMNode().value);
   }
 
   render() {
@@ -50,5 +26,4 @@ class SortMenu extends Component {
     );
   }
 }
-
 export default Sort;
