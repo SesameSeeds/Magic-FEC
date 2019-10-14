@@ -11,24 +11,28 @@
   padding: 15px;
 }
 
-/* .why-do-i-not-work-wtf {
-  display: flex;
+.search-bar{
+  text-align: center;
+}
+
+.effing-loader{
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-} */
+} 
 
 .magic-card {
   justify-content: flex-start;
   flex: 0 0 auto;
   margin: 10px;
-  font-size: .8rem;
+  font-size: 11px;
   text-align: center;
   padding: 10px;
 
 }
 
-.magicCard img {
+.magic-card img {
   width: 223px;
   border-bottom-style: solid;
   border-bottom-color: black;
