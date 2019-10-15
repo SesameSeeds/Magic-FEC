@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import Card from "./Card";
 import Loader from "./Loader";
 import SearchBar from "./SearchBar";
+import AppContext from "../AppContext";
 import debounce from "lodash.debounce";
 
 class CardList extends Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -15,7 +18,8 @@ class CardList extends Component {
       initialRender: true,
       allCards: [],
       pageNumber: 1,
-      error: false
+      error: false,
+      sort: "name"
     };
 
     window.onscroll = debounce(() => {
@@ -44,13 +48,23 @@ class CardList extends Component {
   }
 
   componentDidMount() {
-    this.loadCards(this.state.pageNumber);
+    this.loadCards();
+  }
+
+  componentDidUpdate() {
+    if (this.state.sort !== this.context.sort) {
+      const cardOrder = this.state.cards.sort((a, b) =>
+        a[this.context.sort] > b[this.context.sort] ? 1 : 
+          b[this.context.sort] > a[this.context.sort] ? -1 : 0
+      );
+      this.setState({ sort: this.context.sort, cards: cardOrder });
+    }
   }
 
   loadCards = () => {
     this.setState({ isLoading: true }, () => {
       fetch(
-        `https://cors-anywhere.herokuapp.com/https://api.magicthegathering.io/v1/cards?types=creature&pageSize=30&page=${this.state.pageNumber}&orderBy=name`
+        `https://cors-anywhere.herokuapp.com/https://api.magicthegathering.io/v1/cards?types=creature&pageSize=30&page=${this.state.pageNumber}&orderBy=${this.context.sort}`
       )
         .then(res => res.json())
         .then(res => res.cards.filter(card => card.hasOwnProperty("imageUrl")))
